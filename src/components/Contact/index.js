@@ -13,28 +13,28 @@ function ContactForm() {
     function handleChange(e) {
         if (e.target.name === 'email') {
             const isValid = validateEmail(e.target.value);
-            console.log(isValid);
-
             if (!isValid) {
                 setErrorMessage('Your email is invalid.');
             } else {
-                if (!e.target.value.length) {
-                    setErrorMessage(`${e.target.name} is required`);
-                } else {
-                    setErrorMessage('');
-                }
+                setErrorMessage('');
+            }
+        } else {
+            if (!e.target.value.length) {
+                setErrorMessage(`${e.target.name} is required.`);
+            } else {
+                setErrorMessage('');
             }
         }
-
-        if (!errorMessage) {
-            setFormState({ ...formState, [e.target.name]: e.target.value });
-        }
-    }
+    };
 
     function handleSubmit(e) {
         e.preventDefault();
-        console.log(formState);
-    }
+        if (!errorMessage) {
+            setFormState({ [e.target.name]: e.target.value });
+            console.log('Form', formState);
+        }
+    };
+
     return (
         <section>
             <h1>Contact Me</h1>
